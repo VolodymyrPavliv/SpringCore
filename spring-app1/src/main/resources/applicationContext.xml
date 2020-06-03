@@ -18,7 +18,7 @@
     </bean>
 
     <bean id="classicalMusic"
-          class="com.mushroom.ClassicalMusic"
+          class="com.mushroom.ClassicalMusic">
     </bean>
 
     <bean id="musicPlayer"
