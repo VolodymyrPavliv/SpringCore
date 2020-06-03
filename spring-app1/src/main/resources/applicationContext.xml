@@ -19,8 +19,6 @@
 
     <bean id="classicalMusic"
           class="com.mushroom.ClassicalMusic"
-    init-method="doMyInit"
-    destroy-method="doMyDestroy">
     </bean>
 
     <bean id="musicPlayer"
