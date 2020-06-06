@@ -1,42 +1,52 @@
 package com.mushroom;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class MusicPlayer {
-    private List<Music> playList = new ArrayList<>();
+    @Autowired
+    @Qualifier("rockMusic")
+    private Music music1;
+
+    @Autowired
+    @Qualifier("hipHopMusic")
+    private Music music2;
+
+    @Autowired
+    @Qualifier("classicalMusic")
+    private Music music3;
+
+    @Value("${musicPlayer.name}")
     private String name;
+
+    @Value("${musicPlayer.volume}")
     private int volume;
 
     public MusicPlayer(){}
 
-    public MusicPlayer(List<Music> playList){
-        this.playList = playList;
-    }
-
-    public void setMusic(List<Music> playList) {
-        this.playList = playList;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public int getVolume() {
         return volume;
     }
 
-    public void setVolume(int volume) {
-        this.volume = volume;
-    }
-
-    public void playMusic(){
-        System.out.println("Playing: ");
-        playList.stream()
-                .forEach(song->System.out.println(" "+song.getSong()));
+    public String playMusic(MusicKind musicKind){
+        String result = "Playing: ";
+        switch (musicKind){
+            case ROCK: result+= music1.getSong();
+            break;
+            case HIPHOP: result+= music2.getSong();
+            break;
+            case CLASSICAL: result+= music3.getSong();
+        }
+        return result;
     }
 }
